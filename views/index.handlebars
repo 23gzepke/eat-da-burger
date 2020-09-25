@@ -1,43 +1,70 @@
-<h1 class="text-success">Eat Da Burger!</h1>
+{{!-- Sets body's pre-header as an image --}}
+<img src="/assets/img/burger.png" class="burgimg" height="175" alt="Photo of a burger">
+
+<h1>Eat-Da-Burger!</h1>
+
+{{!-- Creates a row with two columns to handle the undevoured and devoured burgers --}}
+<div class="row">
+    <div class="lefthand">
+        {{#each burgers}}
+            {{#unless devoured}}
+                <div class="burgerText">
+                    {{id}}. {{burger_name}}
+                    <button class="devourbtn" data-id="{{this.id}}">Devour Me!</button>
+                </div>
+            {{/unless}}
+        {{/each}}
+    </div>
+    <div class="righthand">
+        {{#each burgers}}
+            {{#if devoured}}
+                <div id="devoured" class="burgerText">
+                    [ {{id}}. {{burger_name}} ]
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+</div>
+
 <br>
-<br>
 
-<h2 class="text-success">Burgers that have been devoured</h2>
-<br>
-
-<ul>
-  {{#each burgers}}  
-    {{#unless devoured}}
-      {{> burgers/burger-block devoured=true}}
-    {{/unless}}
-  {{/each}}
-</ul>
-
-<h2 class="text-success">Burgers that have not been devoured</h2>
-<br>
-
-<ul>
-  {{#each burgers}}
-    {{#if devoured}}
-      {{> burgers/burger-block devoured=false}}
-    {{/if}}
-  {{/each}}
-</ul>
-
-<h2 class="text-success">Add a Burger</h2>
-<br>
-<form class="create-form" action="/burgers/create" method="POST">
-
-  <div class="form-group">
-    <label for="ca">Burger Name:</label>
-    <input type="text" id="ca" name="burger_name">
-  </div>
-
-  <div class="form-group">
-    <label for="devoured">Devoured?</label><br>
-    <input type="radio" name="devoured" value="1" checked> Not Devoured!<br>
-    <input type="radio" name="devoured" value="0"> Devoured
-  </div>
-
-  <button type="submit" class="btn btn-success">Add Burger</button>
+{{!-- Creates a submit form for each new burger housed under the burger-row display --}}
+<h3>Submit a new burger for your eating pleasure!</h3>
+<form id="createBurger">
+    <textarea type="text" name="burger" style="height:50px;width:500px"></textarea>
+    <br><br>
+    <button class="submitBtn" type="submit">Submit</button>
 </form>
+
+{{!-- Uses Javascript to make AJAX calls to the API to update/change database --}}
+{{!-- <script type="text/javascript">
+    $(".devourbtn").on("click", (event) => {
+        var id = $(this).data("id");
+        console.log(this);
+        var newBurgerStatus = {
+            devoured: true
+        };
+        $.ajax("/api/burgers/" + id, {
+            type: "PUT",
+            data: newBurgerStatus
+        }).then(
+            function() {
+                console.log("your burger has been devoured");
+                location.reload();
+            }
+        );
+    });
+    $("#createBurger").on("submit", (event) => {
+        event.preventDefault();
+        let newBurger = {
+          burger_name: $("#createBurger [name=burger]").val().trim()  
+        };
+        $.ajax("/api/burgers", {
+            type: "POST",
+            data: newBurger
+        }).then(() => {
+            console.log("created new burger");
+            location.reload();
+        });
+    });
+</script> --}}

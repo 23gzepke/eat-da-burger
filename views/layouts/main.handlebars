@@ -1,14 +1,17 @@
+{{!-- Creates the default HTML structure for Handlebars --}}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" integrity="sha384-nNK9n28pDUDDgIiIqZ/MiyO3F4/9vsMtReZK39klb/MtkZI3/LtjSjlmyVPS3KdN" crossorigin="anonymous">
-		<link rel="stylesheet" href="/public/assets/css/burger_style.css">
-		<title>Eat-Da-Burger</title>
-		<script src="https://code.jquery.com/jquery.js"></script>
-	</head>
-	<body>
-		{{{ body }}}
-			<script src="/public/assets/js/burgers.js"></script>
-	</body>
+    <head>
+        {{!-- Houses the links for CSS, Fonts, and jQuery usage --}}
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/assets/css/burger_style.css" type="text/css">
+        <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Open+Sans:ital@1&display=swap" rel="stylesheet">
+        <title>Eat-Da-Burger!</title>
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="/assets/js/burger.js"></script>
+    </head>
+
+    <body>
+        {{{body}}}
+    </body>
 </html>

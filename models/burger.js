@@ -1,26 +1,24 @@
-const orm = require('../config/orm');
+// Requires the ORM functions in the ORM module
+const orm = require("../config/orm.js");
 
+// Hardcodes the only table for each function, leaving remaining variables dyanmic
 const burger = {
-  selectAll: function(cb) {
-    orm.selectAll("burgers", res => {
-      cb(res);
-    });
-  },
-  insertOne: function(values, cb) {
-    orm.insertOne("burgers", values, res => {
-      cb(res);
-    });
-  },
-  updateOne: function(objColVals, condition, cb) {
-    orm.updateOne("burgers", objColVals, condition, res => {
-      cb(res);
-    })
-   },
-   deleteOne: function (condition, cb) {
-     orm.deleteOne("burgers", condition, res => {
-       cb(res);
-     });
-   },
- };
- 
- module.exports = burger;
+    selectAll: function(cb) {
+        orm.selectAll("burgers", (res) => {
+            cb(res);
+        });
+    },
+    insertOne: function(col, val, cb) {
+        orm.insertOne("burgers", col, val, (res) => {
+            cb(res);
+        });
+    },
+    updateOne: function(col, condition, cb) {
+        orm.updateOne("burgers", col, condition, (res) => {
+            cb(res);
+        });
+    }
+};
+
+// Exports as a module
+module.exports = burger;
